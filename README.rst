@@ -1,4 +1,22 @@
 Requests-HTML: HTML Parsing for Humans™
+
+Originally forked from https://github.com/psf/requests-html that aims to solve the proxy problem caused by headless mode of the browser.
+
+.. code-block:: pycon
+
+    # https://github.com/psf/requests-html/issues/341
+    # .local/lib/python3.9/site-packages/requests_html.py
+
+    # headless mode affect the use of proxy :D
+    # originally, `headless` was hardcoded as True, it now can be passed in as parameters for HTMLSession
+
+    @property
+    async def browser(self):
+        if not hasattr(self, "_browser"):
+            self._browser = await pyppeteer.launch(ignoreHTTPSErrors=not(self.verify), headless=self.Headless, args=self.__browser_args)
+
+        return self._browser
+
 =======================================
 
 .. image:: https://farm5.staticflickr.com/4695/39152770914_a3ab8af40d_k_d.jpg
